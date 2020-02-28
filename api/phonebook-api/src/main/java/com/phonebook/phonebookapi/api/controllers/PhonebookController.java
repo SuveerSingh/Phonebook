@@ -1,7 +1,11 @@
 package com.phonebook.phonebookapi.api.controllers;
 
+import com.phonebook.phonebookapi.api.models.request.AddPhonebookEntryRequest;
 import com.phonebook.phonebookapi.api.models.request.AddPhonebookRequest;
+import com.phonebook.phonebookapi.api.models.request.ListPhonebookEntriesRequest;
+import com.phonebook.phonebookapi.api.models.responses.AddPhonebookEntryResponse;
 import com.phonebook.phonebookapi.api.models.responses.AddPhonebookResponse;
+import com.phonebook.phonebookapi.api.models.responses.ListPhoneBookEntriesResponse;
 import com.phonebook.phonebookapi.api.models.responses.ValidateRequestBodyResponses;
 import com.phonebook.phonebookapi.api.service.manager.PhonebookServiceManager;
 import com.phonebook.phonebookapi.api.utilities.PhonebookUtilities;
@@ -37,15 +41,15 @@ public class PhonebookController {
     @ApiOperation(value = "Add a new phonebook")
     @PostMapping(value = "/enlist")
     public ResponseEntity<AddPhonebookResponse> addPhonebook(
-            @RequestHeader("client-id") String clientId,
+            //@RequestHeader("client-id") String clientId,
             @RequestBody AddPhonebookRequest addPhonebookRequest
     ) throws IOException {
 
-        if (!phonebookUtilities.ValidateHeaderParams(clientId)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(new AddPhonebookResponse(INVALID_CREDENTIALS.getErrorCode(),
-                            INVALID_CREDENTIALS.getDescription()));
-        }
+//        if (!phonebookUtilities.ValidateHeaderParams(clientId)) {
+//            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+//                    .body(new AddPhonebookResponse(INVALID_CREDENTIALS.getErrorCode(),
+//                            INVALID_CREDENTIALS.getDescription()));
+//        }
 
         ValidateRequestBodyResponses validateRequestBodyResponses = phonebookUtilities.ValidateRequestBody(addPhonebookRequest);
         if (validateRequestBodyResponses == null) {
@@ -71,6 +75,83 @@ public class PhonebookController {
 
         return ResponseEntity.status(BAD_REQUEST)
                 .body(new AddPhonebookResponse(UNABLE_TO_CREATE_PHONEBOOK.getDescription(),
+                        UNABLE_TO_CREATE_PHONEBOOK.getErrorCode()));
+    }
+
+    @ApiOperation(value = "Add a new phonebook entry")
+    @PostMapping(value = "/enlist-entry")
+    public ResponseEntity<AddPhonebookEntryResponse> addPhonebookEntry(
+            //@RequestHeader("client-id") String clientId,
+            @RequestBody AddPhonebookEntryRequest addPhonebookEntryRequest
+    ) throws IOException {
+
+//        if (!phonebookUtilities.ValidateHeaderParams(clientId)) {
+//            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+//                    .body(new AddPhonebookResponse(INVALID_CREDENTIALS.getErrorCode(),
+//                            INVALID_CREDENTIALS.getDescription()));
+//        }
+
+        ValidateRequestBodyResponses validateRequestBodyResponses = phonebookUtilities.ValidateRequestBody(addPhonebookEntryRequest);
+        if (validateRequestBodyResponses == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new AddPhonebookEntryResponse(INVALID_REQUEST_BODY.getErrorCode(),
+                            INVALID_REQUEST_BODY.getDescription()));
+        }
+
+        if (!validateRequestBodyResponses.status) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new AddPhonebookEntryResponse(validateRequestBodyResponses.getErrorCode(),
+                            validateRequestBodyResponses.getErrorMessage()));
+        }
+
+        AddPhonebookEntryResponse addPhonebookEntryResponse = phonebookServiceManager.enlistEntry(addPhonebookEntryRequest);
+
+        if (addPhonebookEntryResponse != null) {
+            if (addPhonebookEntryResponse.isStatus()) {
+                return ResponseEntity.status(CREATED).body(addPhonebookEntryResponse);
+            }
+            return ResponseEntity.status(BAD_REQUEST).body(addPhonebookEntryResponse);
+        }
+
+        return ResponseEntity.status(BAD_REQUEST)
+                .body(new AddPhonebookEntryResponse(UNABLE_TO_CREATE_PHONEBOOK.getDescription(),
+                        UNABLE_TO_CREATE_PHONEBOOK.getErrorCode()));
+    }
+
+    @ApiOperation(value = "Add a new phonebook entry")
+    @GetMapping(value = "/list")
+    public ResponseEntity<ListPhoneBookEntriesResponse> list(
+            //@RequestHeader("client-id") String clientId,
+            @RequestBody ListPhonebookEntriesRequest listPhonebookEntriesRequest
+    ) throws IOException {
+
+//        if (!phonebookUtilities.ValidateHeaderParams(clientId)) {
+//            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+//                    .body(new AddPhonebookResponse(INVALID_CREDENTIALS.getErrorCode(),
+//                            INVALID_CREDENTIALS.getDescription()));
+//        }
+
+        ValidateRequestBodyResponses validateRequestBodyResponses = phonebookUtilities.ValidateRequestBody(listPhonebookEntriesRequest);
+        if (validateRequestBodyResponses == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ListPhoneBookEntriesResponse(INVALID_REQUEST_BODY.getErrorCode(),
+                            INVALID_REQUEST_BODY.getDescription()));
+        }
+
+        if (!validateRequestBodyResponses.status) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ListPhoneBookEntriesResponse(validateRequestBodyResponses.getErrorCode(),
+                            validateRequestBodyResponses.getErrorMessage()));
+        }
+
+        ListPhoneBookEntriesResponse listPhoneBookEntriesResponse = phonebookServiceManager.list(listPhonebookEntriesRequest);
+
+        if (listPhoneBookEntriesResponse != null) {
+            return ResponseEntity.status(CREATED).body(listPhoneBookEntriesResponse);
+        }
+
+        return ResponseEntity.status(BAD_REQUEST)
+                .body(new ListPhoneBookEntriesResponse(UNABLE_TO_CREATE_PHONEBOOK.getDescription(),
                         UNABLE_TO_CREATE_PHONEBOOK.getErrorCode()));
     }
 }

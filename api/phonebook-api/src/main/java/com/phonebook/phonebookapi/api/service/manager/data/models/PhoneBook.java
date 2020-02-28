@@ -1,6 +1,5 @@
 package com.phonebook.phonebookapi.api.service.manager.data.models;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,24 +7,23 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
-@Data
-
 @Entity
+@Table(name="phone_book")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Phonebook {
+public class PhoneBook {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false, nullable = false)
     private int id;
-
     private String description;
 
     @OneToMany(mappedBy = "phonebook", cascade = CascadeType.ALL)
-    private Set<Phonebook> phonebook;
+    private Set<PhoneBookEntry> phonebookEntry;
 
-    public Phonebook(int id,
-                      String description) {
+    public PhoneBook(int id,
+                     String description) {
         this.id = id;
         this.description = description;
     }
