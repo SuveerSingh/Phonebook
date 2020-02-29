@@ -116,7 +116,7 @@ public class PhonebookController {
     }
 
     @ApiOperation(value = "List all entries in a phonebook")
-    @GetMapping(value = "/list")
+    @PostMapping(value = "/list")
     public ResponseEntity<ListPhoneBookEntriesResponse> list(
             @RequestHeader("client-id") String clientId,
             @RequestBody ListPhonebookEntriesRequest listPhonebookEntriesRequest
@@ -153,7 +153,7 @@ public class PhonebookController {
     }
 
     @ApiOperation(value = "Update a phonebook entry")
-    @GetMapping(value = "/update-entry")
+    @PostMapping(value = "/update-entry")
     public ResponseEntity<UpdatePhonebookEntryResponse> update(
             @RequestHeader("client-id") String clientId,
             @RequestBody UpdatePhonebookEntryRequest updatePhonebookEntryRequest

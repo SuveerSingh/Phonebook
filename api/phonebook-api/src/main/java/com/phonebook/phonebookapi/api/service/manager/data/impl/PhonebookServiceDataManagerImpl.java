@@ -66,21 +66,30 @@ public class PhonebookServiceDataManagerImpl implements PhonebookServiceDataMana
     @Override
     public ListPhoneBookEntriesResponse list(ListPhonebookEntriesRequest listPhonebookEntriesRequest) {
 
-        Iterable<PhoneBookEntry> phoneBookEntries = phonebookEntryRepository.findAll();
+        Optional<PhoneBook> phoneBookOptional = phonebookRepository.findById(listPhonebookEntriesRequest.getPhonebookId());
 
-        ListPhoneBookEntriesResponse listPhoneBookEntriesResponse = new ListPhoneBookEntriesResponse();
-        listPhoneBookEntriesResponse.phoneBookEntryList = new ArrayList<>();
+        if (phoneBookOptional != null) {
+            PhoneBook phoneBook = phoneBookOptional.get();
 
-        for (PhoneBookEntry pbe : phoneBookEntries) {
-            PhoneBookEntry phoneBookEntry = new PhoneBookEntry();
-            phoneBookEntry.setId(pbe.getId());
-            phoneBookEntry.setDescription(pbe.getDescription());
-            phoneBookEntry.setPhoneNumber(pbe.getPhoneNumber());
+            Iterable<PhoneBookEntry> phoneBookEntries = phonebookEntryRepository.findPhonebookEntryByPhonebookId(listPhonebookEntriesRequest.getPhonebookId());
 
-            listPhoneBookEntriesResponse.phoneBookEntryList.add(phoneBookEntry);
+            ListPhoneBookEntriesResponse listPhoneBookEntriesResponse = new ListPhoneBookEntriesResponse();
+            listPhoneBookEntriesResponse.phoneBookEntryList = new ArrayList<>();
+
+            for (PhoneBookEntry pbe : phoneBookEntries) {
+                PhoneBookEntry phoneBookEntry = new PhoneBookEntry();
+                phoneBookEntry.setId(pbe.getId());
+                phoneBookEntry.setDescription(pbe.getDescription());
+                phoneBookEntry.setPhoneNumber(pbe.getPhoneNumber());
+
+                listPhoneBookEntriesResponse.phoneBookEntryList.add(phoneBookEntry);
+            }
+
+            return listPhoneBookEntriesResponse;
         }
 
-        return listPhoneBookEntriesResponse;
+        return new ListPhoneBookEntriesResponse(ErrorResponses.UNABLE_TO_FIND_PHONEBOOK.getErrorCode(),
+                ErrorResponses.UNABLE_TO_FIND_PHONEBOOK_ENTRY.getDescription());
 
     }
 
@@ -95,7 +104,7 @@ public class PhonebookServiceDataManagerImpl implements PhonebookServiceDataMana
             phoneBookEntry.setDescription(updatePhonebookEntryRequest.getDescription());
             phoneBookEntry.setPhoneNumber(updatePhonebookEntryRequest.getPhoneNumber());
 
-            phonebookEntryRepository.updatePhonebookEntryById(phoneBookEntry.getId(),
+            phonebookEntryRepository.updateDescriptionAndPhoneNumberById(phoneBookEntry.getId(),
                     phoneBookEntry.getDescription(),
                     phoneBookEntry.getPhoneNumber());
 

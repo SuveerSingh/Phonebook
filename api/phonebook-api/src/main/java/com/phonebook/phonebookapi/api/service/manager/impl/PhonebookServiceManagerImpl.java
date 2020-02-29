@@ -23,7 +23,8 @@ public class PhonebookServiceManagerImpl implements PhonebookServiceManager {
 
     @Override
     public AddPhonebookResponse enlist(AddPhonebookRequest addPhonebookRequest) {
-       return phonebookServiceDataManager.enlist(addPhonebookRequest);
+        AddPhonebookResponse response = phonebookServiceDataManager.enlist(addPhonebookRequest);
+        return response;
     }
 
     @Override
@@ -38,6 +39,6 @@ public class PhonebookServiceManagerImpl implements PhonebookServiceManager {
 
     @Override
     public UpdatePhonebookEntryResponse updateEntry(UpdatePhonebookEntryRequest updatePhonebookEntryRequest) {
-        return  phonebookServiceDataManager.updateEntry(updatePhonebookEntryRequest);
+        return phonebookServiceDataManager.updateEntry(updatePhonebookEntryRequest);
     }
 }
