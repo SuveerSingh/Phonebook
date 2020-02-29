@@ -4,9 +4,11 @@ import com.phonebook.phonebookapi.api.models.helpers.ErrorResponses;
 import com.phonebook.phonebookapi.api.models.request.AddPhonebookEntryRequest;
 import com.phonebook.phonebookapi.api.models.request.AddPhonebookRequest;
 import com.phonebook.phonebookapi.api.models.request.ListPhonebookEntriesRequest;
+import com.phonebook.phonebookapi.api.models.request.UpdatePhonebookEntryRequest;
 import com.phonebook.phonebookapi.api.models.responses.AddPhonebookEntryResponse;
 import com.phonebook.phonebookapi.api.models.responses.AddPhonebookResponse;
 import com.phonebook.phonebookapi.api.models.responses.ListPhoneBookEntriesResponse;
+import com.phonebook.phonebookapi.api.models.responses.UpdatePhonebookEntryResponse;
 import com.phonebook.phonebookapi.api.service.manager.data.PhonebookServiceDataManager;
 import com.phonebook.phonebookapi.api.service.manager.data.models.PhoneBook;
 import com.phonebook.phonebookapi.api.service.manager.data.models.PhoneBookEntry;
@@ -15,6 +17,7 @@ import com.phonebook.phonebookapi.api.service.manager.data.repository.PhonebookR
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class PhonebookServiceDataManagerImpl implements PhonebookServiceDataManager {
@@ -78,6 +81,29 @@ public class PhonebookServiceDataManagerImpl implements PhonebookServiceDataMana
         }
 
         return listPhoneBookEntriesResponse;
+
+    }
+
+    @Override
+    public UpdatePhonebookEntryResponse updateEntry(UpdatePhonebookEntryRequest updatePhonebookEntryRequest) {
+
+        Optional<PhoneBookEntry> phoneBookEntryOptional = phonebookEntryRepository.findById(updatePhonebookEntryRequest.getPhonebookEntryId());
+
+        if (phoneBookEntryOptional != null) {
+            PhoneBookEntry phoneBookEntry = phoneBookEntryOptional.get();
+
+            phoneBookEntry.setDescription(updatePhonebookEntryRequest.getDescription());
+            phoneBookEntry.setPhoneNumber(updatePhonebookEntryRequest.getPhoneNumber());
+
+            phonebookEntryRepository.updatePhonebookEntryById(phoneBookEntry.getId(),
+                    phoneBookEntry.getDescription(),
+                    phoneBookEntry.getPhoneNumber());
+
+            return new UpdatePhonebookEntryResponse(true);
+        }
+
+        return new UpdatePhonebookEntryResponse(ErrorResponses.UNABLE_TO_FIND_PHONEBOOK_ENTRY.getErrorCode(),
+                ErrorResponses.UNABLE_TO_FIND_PHONEBOOK_ENTRY.getDescription());
 
     }
 }

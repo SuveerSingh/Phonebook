@@ -3,9 +3,11 @@ package com.phonebook.phonebookapi.api.service.manager.impl;
 import com.phonebook.phonebookapi.api.models.request.AddPhonebookEntryRequest;
 import com.phonebook.phonebookapi.api.models.request.AddPhonebookRequest;
 import com.phonebook.phonebookapi.api.models.request.ListPhonebookEntriesRequest;
+import com.phonebook.phonebookapi.api.models.request.UpdatePhonebookEntryRequest;
 import com.phonebook.phonebookapi.api.models.responses.AddPhonebookEntryResponse;
 import com.phonebook.phonebookapi.api.models.responses.AddPhonebookResponse;
 import com.phonebook.phonebookapi.api.models.responses.ListPhoneBookEntriesResponse;
+import com.phonebook.phonebookapi.api.models.responses.UpdatePhonebookEntryResponse;
 import com.phonebook.phonebookapi.api.service.manager.PhonebookServiceManager;
 import com.phonebook.phonebookapi.api.service.manager.data.PhonebookServiceDataManager;
 import org.springframework.stereotype.Service;
@@ -32,5 +34,10 @@ public class PhonebookServiceManagerImpl implements PhonebookServiceManager {
     @Override
     public ListPhoneBookEntriesResponse list(ListPhonebookEntriesRequest listPhonebookEntriesRequest) {
         return phonebookServiceDataManager.list(listPhonebookEntriesRequest);
+    }
+
+    @Override
+    public UpdatePhonebookEntryResponse updateEntry(UpdatePhonebookEntryRequest updatePhonebookEntryRequest) {
+        return  phonebookServiceDataManager.updateEntry(updatePhonebookEntryRequest);
     }
 }
