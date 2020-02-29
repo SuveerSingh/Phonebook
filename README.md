@@ -1,26 +1,38 @@
 # Phonebook Application Intro
 
-This is my submission to the Phonebook Application technical challenge. The application follows the Client/Server architecture model. 
+This is my submission to the Phonebook Application technical challenge. 
+
+The application follows the Client/Server architecture model. 
 
 Ideally the API should sit behind a Gateway with a secure authentication model : client-id/client-secret | mutual tls | openid connect | basic auth etc. I have excluded this from my design as this requires a standalone/centrally deployed mechanism where all APIs are deployed to. 
 
-# Phonebook Application Breakdown
-
-
+The application has been broken down into the following components : 
 
 # Web Interface
 
+Technology/Framework : Angular
 
+Workflow :
+
+[1] 
 
 # API
 
 Technology/Framework : Springboot - Java 8
+
 Database : PostgreSQL
+
+ORM : CrudRepository
+
 Design Patter : Dependency Injection | Data Driven Design
+
 Testing Framework : Mockito
+
 Migration Script Handler : Flyway
 
 OS Version : macOS Catalina Version 10.15
+
+Docuementation : Swagger (http://localhost:8080/swagger-ui.html)
 
 Workflow : 
 
@@ -34,7 +46,7 @@ Workflow :
 
 [5] Once the service manager has received the request, the request is then passed into the data service nanager, which then creates the final layer of abstraction within the api. Creating these layers of abstraction also allows to have cleaner testable code without heavy dependencies amongst classes.
 
-[6] The data layer has been written independently and does not require PostgreSQL in specific to function. Utilising the JDBC underlying framework allows to use any of the following databases : Oracle, MySQL, DB2, SQL Server. The migration scripts however are specific to PostgreSQL in terms of syntax. 
+[6] The data layer has been written independently and does not require PostgreSQL in specific to function. Utilising the JDBC underlying framework allows us to use any of the following databases : Oracle, MySQL, DB2, SQL Server. The migration scripts however are specific to PostgreSQL in terms of syntax. 
 
 [7] The choice of a PostgreSQL database was purely due to it being open source. Its very easy to learn and manages relational databases. 
 
