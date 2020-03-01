@@ -10,11 +10,42 @@ The application has been broken down into the following components :
 
 # Web Interface
 
+I have decided to utilise a template that ive used before, which allowed me to reuse components and not rebuild components from scratch.
+
 Technology/Framework : Angular
+
+Template : https://www.creative-tim.com/
+
+Licence Type : Developer
+
+OS Version : Tested in Google Chrome Version 78.0.3904.87 (Official Build) (64-bit) on macOS Catalina Version 10.15
+
+### Installing : 
+
+[1] Run npm install
+
+[2] Run ng serve : http://localhost:4200
+
+[3] Ensure server is running
 
 ### Workflow :
 
-Technology/Framework : Angular 8
+[1] I have excluded an OAuth provider from the implementation. The UI however does cater for this concept graphically.
+
+[2] The landing page displays the functionality of the application.
+
+[3] Phonebook Managements is a central location for managing phonebooks.
+
+[4] Phonebook Entry Management provides the functionality of managing entries within a phonebook.
+
+[5] I did include the concept of categories with the intention of being able to create different types of phonebooks | Personal, Business etc. In the essence of time i have decided to exclude this.
+
+[6] All requests to the api are performed utilising JSON/HTTP.
+
+[7] A client id has been embended into the application. This will ideally differ per environment and injected via a CI/CD pipeline
+
+[8] 
+
 
 
 
@@ -26,7 +57,7 @@ Database : PostgreSQL
 
 ORM : CrudRepository
 
-Design Patter : Dependency Injection | Data Driven Design
+Design Pattern : Dependency Injection | Data Driven Design
 
 Testing Framework : Mockito
 
