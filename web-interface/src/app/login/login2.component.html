@@ -1,0 +1,90 @@
+<style>
+  .search {
+    width: 100%;
+    height: 100px;
+    background-image: url('../assets/img/MiMoney_Final Logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    background-color: transparent;
+  }
+</style>
+
+<div class="wrapper wrapper-full-page">
+  <div class="page-header login-page header-filter" filter-color="black" style="background-image: url('../../assets/img/library.jpg'); background-size: cover; background-position: top center;">
+    <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+    <div class="container">
+      <div class="col-md-10 ml-auto mr-auto">
+        <form class="form" method="" action="">
+          <div class="card card-login card-hidden">
+
+            <!-- <h2 class="card-title text-center">Welcome</h2> -->
+            <br/>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-2">
+                  <div class="search"></div>
+                </div>
+                <div class="col-md-5"></div>
+              </div>
+
+            </div>
+            <div class="card-footer text-center">
+              <!-- <div class="form-check mr-auto">Clic
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value=""> I agree to the Terms and Conditions
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div> -->
+              <div class="col-md-5"></div>
+              <div class="col-md-2">
+                <button mat-raised-button type="submit" class="btn btn-rose" (click)="linkProfileToDigitalId()">Lets Go</button>
+              </div>
+              <div class="col-md-5"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <footer class="footer ">
+      <div class="container">
+        <nav class="pull-left">
+          <!-- <ul>
+                    <li>
+                      <a href="https://www.creative-tim.com">
+                        Creative Tim
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http://presentation.creative-tim.com">
+                        About Us
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http://blog.creative-tim.com">
+                        Blog
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://www.creative-tim.com/license">
+                        Licenses
+                      </a>
+                    </li>
+                  </ul> -->
+        </nav>
+        <div class="copyright pull-right">
+          <!-- &copy;
+                    {{test | date: 'yyyy'}}, made with <i class="material-icons">favorite</i> by
+                  <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web. -->
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<div class="my-container">
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+</div>

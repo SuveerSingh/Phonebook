@@ -35,5 +35,6 @@ public class SwaggerConfig {
                 .build()
                 .securitySchemes(schemeList);
     }
+
 }
 

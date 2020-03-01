@@ -1,11 +1,9 @@
 package com.phonebook.phonebookapi.api.controllers;
 
-import com.phonebook.phonebookapi.api.models.request.AddPhonebookEntryRequest;
-import com.phonebook.phonebookapi.api.models.request.AddPhonebookRequest;
-import com.phonebook.phonebookapi.api.models.request.ListPhonebookEntriesRequest;
-import com.phonebook.phonebookapi.api.models.request.UpdatePhonebookEntryRequest;
+import com.phonebook.phonebookapi.api.models.request.*;
 import com.phonebook.phonebookapi.api.models.responses.*;
 import com.phonebook.phonebookapi.api.service.manager.PhonebookServiceManager;
+import com.phonebook.phonebookapi.api.service.manager.data.models.PhoneBook;
 import com.phonebook.phonebookapi.api.utilities.PhonebookUtilities;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,6 +18,7 @@ import static com.phonebook.phonebookapi.api.models.helpers.ErrorResponses.*;
 import static org.springframework.http.HttpStatus.*;
 
 @Slf4j
+@CrossOrigin(origins = "http://locahost:4200", maxAge = 3600)
 @Api(value = "Phonebook API", tags = {"Phonebook API"})
 @RestController
 @RequestMapping("/phonebook")
@@ -33,7 +32,6 @@ public class PhonebookController {
         this.phonebookServiceManager = phonebookServiceManager;
         this.phonebookUtilities = phonebookUtilities;
     }
-
 
     @ApiOperation(value = "Add a new phonebook")
     @PostMapping(value = "/enlist")
@@ -72,6 +70,44 @@ public class PhonebookController {
 
         return ResponseEntity.status(BAD_REQUEST)
                 .body(new AddPhonebookResponse(UNABLE_TO_CREATE_PHONEBOOK.getDescription(),
+                        UNABLE_TO_CREATE_PHONEBOOK.getErrorCode()));
+    }
+
+    @CrossOrigin(origins = "http://localhost:8080")
+    @ApiOperation(value = "List all entries in a phonebook")
+    @PostMapping(value = "/list-phonebooks")
+    public ResponseEntity<ListPhonebookResponse> listPhonebooks(
+            @RequestHeader("client-id") String clientId,
+            @RequestBody ListPhonebookRequest listPhonebookRequest
+    ) throws IOException {
+
+        if (!phonebookUtilities.ValidateHeaderParams(clientId)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(new ListPhonebookResponse(INVALID_CREDENTIALS.getErrorCode(),
+                            INVALID_CREDENTIALS.getDescription()));
+        }
+
+        ValidateRequestBodyResponses validateRequestBodyResponses = phonebookUtilities.ValidateRequestBody(listPhonebookRequest);
+        if (validateRequestBodyResponses == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ListPhonebookResponse(INVALID_REQUEST_BODY.getErrorCode(),
+                            INVALID_REQUEST_BODY.getDescription()));
+        }
+
+        if (!validateRequestBodyResponses.status) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ListPhonebookResponse(validateRequestBodyResponses.getErrorCode(),
+                            validateRequestBodyResponses.getErrorMessage()));
+        }
+
+        ListPhonebookResponse listPhonebookResponse = phonebookServiceManager.listPhonebooks(listPhonebookRequest);
+
+        if (listPhonebookResponse != null) {
+            return ResponseEntity.status(CREATED).body(listPhonebookResponse);
+        }
+
+        return ResponseEntity.status(BAD_REQUEST)
+                .body(new ListPhonebookResponse(UNABLE_TO_CREATE_PHONEBOOK.getDescription(),
                         UNABLE_TO_CREATE_PHONEBOOK.getErrorCode()));
     }
 
@@ -116,8 +152,8 @@ public class PhonebookController {
     }
 
     @ApiOperation(value = "List all entries in a phonebook")
-    @PostMapping(value = "/list")
-    public ResponseEntity<ListPhoneBookEntriesResponse> list(
+    @PostMapping(value = "/list-entries")
+    public ResponseEntity<ListPhoneBookEntriesResponse> listEntries(
             @RequestHeader("client-id") String clientId,
             @RequestBody ListPhonebookEntriesRequest listPhonebookEntriesRequest
     ) throws IOException {
@@ -141,7 +177,7 @@ public class PhonebookController {
                             validateRequestBodyResponses.getErrorMessage()));
         }
 
-        ListPhoneBookEntriesResponse listPhoneBookEntriesResponse = phonebookServiceManager.list(listPhonebookEntriesRequest);
+        ListPhoneBookEntriesResponse listPhoneBookEntriesResponse = phonebookServiceManager.listEntries(listPhonebookEntriesRequest);
 
         if (listPhoneBookEntriesResponse != null) {
             return ResponseEntity.status(CREATED).body(listPhoneBookEntriesResponse);
@@ -188,5 +224,6 @@ public class PhonebookController {
                 .body(new UpdatePhonebookEntryResponse(UNABLE_TO_CREATE_PHONEBOOK.getDescription(),
                         UNABLE_TO_CREATE_PHONEBOOK.getErrorCode()));
     }
+
 }
 

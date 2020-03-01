@@ -1,0 +1,10 @@
+{
+    "baseUrl": "http://localhost:8080/phonebook/",
+    "subscriptionKey":"eb97e508202440f48bb3bb610ecdd0bb",
+    "clientID": "de0b3213-55c0-4e61-885a-30f13544d472",
+    "tenantName":"stusitmimoney.onmicrosoft.com",
+    "redirectUrl":"https://mimoney-suwebapp-azu.azurewebsites.net",
+    "loginPolicyName":"B2C_1_mimoneysignupnin",
+    "forgotPasswordPolicyName":"B2C_1_mimoney4gotpass"
+
+}

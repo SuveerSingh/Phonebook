@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class PhoneBook {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
     private int id;
     private String description;

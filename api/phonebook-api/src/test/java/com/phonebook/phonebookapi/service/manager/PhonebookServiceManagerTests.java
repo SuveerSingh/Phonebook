@@ -52,7 +52,7 @@ public class PhonebookServiceManagerTests {
 
         final AddPhonebookEntryResponse addPhonebookEntryResponseMock = new AddPhonebookEntryResponse(true);
 
-        AddPhonebookEntryRequest addPhonebookEntryRequest = new AddPhonebookEntryRequest("1","Test", "Test");
+        AddPhonebookEntryRequest addPhonebookEntryRequest = new AddPhonebookEntryRequest(1,"Test", "Test");
 
         when(
                 phonebookServiceDataManager.enlistEntry(eq(addPhonebookEntryRequest))
@@ -72,10 +72,10 @@ public class PhonebookServiceManagerTests {
         listPhoneBookEntriesResponseMock.phoneBookEntryList = new ArrayList<>();
 
         when(
-                phonebookServiceDataManager.list(eq(listPhonebookEntriesRequest))
+                phonebookServiceDataManager.listEntries(eq(listPhonebookEntriesRequest))
         ).thenReturn(listPhoneBookEntriesResponseMock);
 
-        ListPhoneBookEntriesResponse listPhoneBookEntriesResponse = phonebookServiceManager.list(listPhonebookEntriesRequest);
+        ListPhoneBookEntriesResponse listPhoneBookEntriesResponse = phonebookServiceManager.listEntries(listPhonebookEntriesRequest);
 
         Assert.assertEquals(!listPhoneBookEntriesResponseMock.phoneBookEntryList.isEmpty(), !listPhoneBookEntriesResponse.getPhoneBookEntryList().isEmpty());
     }

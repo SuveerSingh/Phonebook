@@ -1,10 +1,7 @@
 package com.phonebook.phonebookapi.api.utilities.impl;
 
 import com.phonebook.phonebookapi.api.models.helpers.ErrorResponses;
-import com.phonebook.phonebookapi.api.models.request.AddPhonebookEntryRequest;
-import com.phonebook.phonebookapi.api.models.request.AddPhonebookRequest;
-import com.phonebook.phonebookapi.api.models.request.ListPhonebookEntriesRequest;
-import com.phonebook.phonebookapi.api.models.request.UpdatePhonebookEntryRequest;
+import com.phonebook.phonebookapi.api.models.request.*;
 import com.phonebook.phonebookapi.api.models.responses.ValidateRequestBodyResponses;
 import com.phonebook.phonebookapi.api.utilities.PhonebookUtilities;
 import org.springframework.stereotype.Service;
@@ -26,7 +23,7 @@ public class PhonebookUtilitiesImpl implements PhonebookUtilities {
             return false;
         }
 
-        if (clientId.length() != 0) {
+        if (clientId.length() == 0) {
             return false;
         }
 
@@ -59,6 +56,21 @@ public class PhonebookUtilitiesImpl implements PhonebookUtilities {
     }
 
     @Override
+    public ValidateRequestBodyResponses ValidateRequestBody(ListPhonebookRequest listPhonebookRequest) {
+        if (listPhonebookRequest == null) {
+            return new ValidateRequestBodyResponses(ErrorResponses.INVALID_REQUEST_BODY.getDescription(),
+                    ErrorResponses.INVALID_REQUEST_BODY.getErrorCode());
+        }
+
+        if (listPhonebookRequest.getUserId() == 0) {
+            return new ValidateRequestBodyResponses(ErrorResponses.NULL_VALUE_IN_REQUEST.getDescription(),
+                    ErrorResponses.NULL_VALUE_IN_REQUEST.getErrorCode());
+        }
+
+        return new ValidateRequestBodyResponses(true);
+    }
+
+    @Override
     public ValidateRequestBodyResponses ValidateRequestBody(AddPhonebookEntryRequest addPhonebookEntryRequest) {
 
         if (addPhonebookEntryRequest == null) {
@@ -66,7 +78,7 @@ public class PhonebookUtilitiesImpl implements PhonebookUtilities {
                     ErrorResponses.INVALID_REQUEST_BODY.getErrorCode());
         }
 
-        if (isNullOrEmpty(addPhonebookEntryRequest.getPhonebookDescription())) {
+        if (addPhonebookEntryRequest.getPhonebookId() == 0) {
             return new ValidateRequestBodyResponses(ErrorResponses.NULL_VALUE_IN_REQUEST.getDescription(),
                     ErrorResponses.NULL_VALUE_IN_REQUEST.getErrorCode());
         }

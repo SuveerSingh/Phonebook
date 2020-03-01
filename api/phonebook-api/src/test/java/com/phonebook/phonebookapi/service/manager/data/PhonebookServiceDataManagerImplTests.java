@@ -55,7 +55,7 @@ public class PhonebookServiceDataManagerImplTests {
     @Test
     public void enlistEntry() {
 
-        AddPhonebookEntryRequest addPhonebookEntryRequest = new AddPhonebookEntryRequest("Test",
+        AddPhonebookEntryRequest addPhonebookEntryRequest = new AddPhonebookEntryRequest(1,
                 "Test",
                 "Test");
 
@@ -90,7 +90,7 @@ public class PhonebookServiceDataManagerImplTests {
                 phonebookRepository.findById(eq(listPhonebookEntriesRequest.getPhonebookId()))
         ).thenReturn(Optional.of(phoneBook));
 
-        ListPhoneBookEntriesResponse listPhoneBookEntriesResponse = phonebookServiceDataManager.list(listPhonebookEntriesRequest);
+        ListPhoneBookEntriesResponse listPhoneBookEntriesResponse = phonebookServiceDataManager.listEntries(listPhonebookEntriesRequest);
 
         Assert.assertEquals(listPhoneBookEntriesResponseMock.getPhoneBookEntryList().isEmpty(),
                 listPhoneBookEntriesResponse.getPhoneBookEntryList().isEmpty());

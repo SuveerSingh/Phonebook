@@ -1,0 +1,63 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <mat-form-field class="example-full-width">
+                                <input matInput type="text" placeholder="Phonebook Name" [(ngModel)]="description">
+                            </mat-form-field>
+                        </div>
+                        <button mat-raised-button class="btn btn-default" (click)="addPhonebook()">Add
+                            Phonebook
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="card">
+                    <div class="card-header card-header-grey card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">books</i>
+                        </div>
+                        <h4 class="card-title">My Phonebooks</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">{{ tableData1.headerRow[0] }}</th>
+                                        <th></th>
+                                        <th class="text-center">{{ tableData1.headerRow[1] }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of tableData1.dataRows">
+                                        <td class="text-center">{{row[0]}}</td>
+                                        <td></td>
+                                        <td class="text-center">{{row[1]}}</td>
+                                        <td></td>
+                                        <td class="td-actions text-right">
+                                            <button mat-raised-button type="button" class="btn btn-warning"
+                                                (click)="edit(row[0], row[1])" mat-raised-button
+                                                matTooltip="Edit Phonebook" [matTooltipPosition]="position.value">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="my-container">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+</div>

@@ -8,14 +8,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class AddPhonebookEntryRequest {
-    public String phonebookDescription;
+    public Integer phonebookId;
     public String description;
     private String phoneNumber;
 
-    public AddPhonebookEntryRequest(String phonebookDescription,
+    public AddPhonebookEntryRequest(Integer phonebookId,
                                     String description,
                                     String phoneNumber){
-        this.phonebookDescription = phonebookDescription;
+        this.phonebookId = phonebookId;
         this.description = description;
         this.phoneNumber = phoneNumber;
     }

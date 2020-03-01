@@ -1,0 +1,70 @@
+<style>
+  .phonebookLogo {
+    width: 100%;
+    height: 100px;
+    background-image: url('../assets/img/PhonebookLogo.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    background-color: transparent;
+  }
+</style>
+
+<div class="wrapper wrapper-full-page">
+  <div class="page-header login-page header-filter" filter-color="black"
+    style="background-image: url('../../assets/img/Telephone.jpg'); background-size: cover; background-position: top center;">
+    <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+    <div class="container">
+      <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
+        <form class="form" method="" action="">
+          <div class="card card-login card-hidden">
+            <div class="card-header card-header-grey text-center">
+              <h4 class="card-title">Phonebook Manager</h4>
+              <div class="social-line">
+                <a (click)="login()" class="btn btn-just-icon btn-link btn-white">
+                  <i class="fa fa-google "></i>
+                </a>
+                <a (click)="login()" class="btn btn-just-icon btn-link btn-white">
+                  <i class="fa fa-facebook-f"></i>
+                </a>
+                <a (click)="login()" class="btn btn-just-icon btn-link btn-white">
+                  <i class="fa fa-windows"></i>
+                </a>
+                <a (click)="login()" class="btn btn-just-icon btn-link btn-white">
+                  <i class="fa fa-github"></i>
+                </a>                
+              </div>
+            </div>
+            <div class="card-body ">
+              <!-- <p class="card-description text-center"></p> -->
+              <div class="row" style="padding-left: 15px">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 text-center" (click)="login()">
+                  <div class="phonebookLogo"></div>
+                </div>
+                <div class="col-md-3"></div>
+              </div>
+            </div>
+            <div class="card-footer justify-content-center">
+              <p>All your contacts in one place</p>
+            </div>
+            <div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <footer class="footer ">
+      <div class="container">
+        <nav class="pull-left">          
+        </nav>
+        <div class="copyright pull-right">          
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<div class="my-container">
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+</div>

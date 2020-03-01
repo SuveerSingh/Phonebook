@@ -12,9 +12,11 @@ The application has been broken down into the following components :
 
 Technology/Framework : Angular
 
-Workflow :
+### Workflow :
 
-[1] 
+Technology/Framework : Angular 8
+
+
 
 # API
 
@@ -34,7 +36,17 @@ OS Version : macOS Catalina Version 10.15
 
 Docuementation : Swagger (http://localhost:8080/swagger-ui.html)
 
-Workflow : 
+### Installing : 
+
+[1] Ensure Maven is installed : https://maven.apache.org/install.html
+
+[2] Clean install with maven: mvn clean install
+
+[3] Install PostgreSQL : https://www.postgresql.org/download/
+
+[4] Create a database called "Phonebook_db" in PostgreSQL
+
+### Workflow : 
 
 [1] The API exposes 1 controller : PhonebookController 
 
