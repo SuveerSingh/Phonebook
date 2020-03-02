@@ -62,6 +62,8 @@ OS Version : macOS Catalina Version 10.15
 
 Docuementation : Swagger (http://localhost:8080/swagger-ui.html)
 
+Logging : Ideally would have used @Sl4j : exlcuded from build
+
 ### Installing : 
 
 [1] Ensure Maven is installed : https://maven.apache.org/install.html
