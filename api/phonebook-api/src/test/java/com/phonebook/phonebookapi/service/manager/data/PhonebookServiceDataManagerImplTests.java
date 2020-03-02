@@ -63,10 +63,10 @@ public class PhonebookServiceDataManagerImplTests {
 
         PhoneBookEntry phoneBookEntry = new PhoneBookEntry("1", "Test");
 
-        PhoneBook phoneBook = new PhoneBook(1, "Test");
+        Optional<PhoneBook> phoneBook = Optional.of(new PhoneBook(1, "Test"));
 
         when(
-                phonebookRepository.findByDescription(eq(addPhonebookEntryRequest.getDescription()))
+                phonebookRepository.findById(eq(addPhonebookEntryRequest.getPhonebookId()))
         ).thenReturn(phoneBook);
 
         AddPhonebookEntryResponse addPhonebookEntryResponse = phonebookServiceDataManager.enlistEntry(addPhonebookEntryRequest);

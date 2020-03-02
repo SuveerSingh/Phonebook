@@ -146,7 +146,7 @@ public class PhonebookControllerTest {
     public void PhonebookAPI_List_InvalidChannelCredentials() throws Exception {
 
         final MvcResult mvcResult = this.mockMvc.perform(
-                post("/phonebook/list")
+                post("/phonebook/list-entries")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("client-id", INVALID_CLIENT_ID_INCORRECT_ID)
                         .content("{\n" +
@@ -171,7 +171,7 @@ public class PhonebookControllerTest {
         ).thenReturn(true);
 
         final MvcResult mvcResult = this.mockMvc.perform(
-                post("/phonebook/list")
+                post("/phonebook/list-entries")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("client-id", CLIENT_ID)
                         .content("{\n" +
