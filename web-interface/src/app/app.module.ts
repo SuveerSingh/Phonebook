@@ -96,7 +96,7 @@ export function init(settingsProvider: SettingsProvider) {
     MatToolbarModule,
     MatTooltipModule,
     SweetAlertModule
-  ]
+  ]  
 })
 export class MaterialModule { }
 

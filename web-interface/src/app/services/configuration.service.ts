@@ -10,8 +10,8 @@ export class ConfigurationService {
   constructor(public settingsProvider: SettingsProvider) {
 
     this.urls = {
-      baseUrl: this.settingsProvider.configuration.baseUrl
- 
+      baseUrl: this.settingsProvider.configuration.baseUrl,
+      actuatorUrl : this.settingsProvider.configuration.actuatorUrl
     };
 
     console.log("BASE URL : " + this.urls.baseUrl);   

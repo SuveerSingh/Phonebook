@@ -41,7 +41,7 @@ export const ROUTES: RouteInfo[] = [{
     icontype: 'face'
 },
 { 
-    path: '/profilemanagement', 
+    path: '/categorymanagement', 
     title: 'Category Management',  
     type: 'link',
     icontype: 'group_work'

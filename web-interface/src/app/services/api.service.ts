@@ -30,10 +30,18 @@ export class APIService {
             .map((response: Response) => {
                 return response.json();
             })
-            .catch(this.handleError);
+            .catch(this.handleError);        
+    }
+    
+    getCommand(path): Observable<any> {                             
+        console.log('URL : ' + this._ConfigurationService.geturls().actuatorUrl + path);
 
-        //return responseJSON;
-    }    
+        return this._http.get(this._ConfigurationService.geturls().actuatorUrl + path)
+            .map((response: Response) => {
+                return response.json();
+            })
+            .catch(this.handleError);        
+    }
 
     generateHeaders() {
         var requestHeaders = {
@@ -48,17 +56,13 @@ export class APIService {
 
     private handleError(error: Response) {        
         console.log(error);
-
-        if (error) {
-            if (error.status) {
-                console.log(error);
-            }
-        }
-        else
-        {
-            return Observable.throw(error);
-        }
+        return Observable.throw(error);
     }    
+
+
+    checkHealth(){
+        return this.getCommand('info');
+    }
 
     listPhonebooks(userId){
 

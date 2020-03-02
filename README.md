@@ -26,7 +26,7 @@ OS Version : Tested in Google Chrome Version 78.0.3904.87 (Official Build) (64-b
 
 [2] Run ng serve : http://localhost:4200
 
-[3] Ensure server is running
+[3] Ensure server(API) is running
 
 ### Workflow :
 
@@ -43,11 +43,6 @@ OS Version : Tested in Google Chrome Version 78.0.3904.87 (Official Build) (64-b
 [6] All requests to the api are performed utilising JSON/HTTP.
 
 [7] A client id has been embended into the application. This will ideally differ per environment and injected via a CI/CD pipeline
-
-[8] 
-
-
-
 
 # API
 
@@ -76,6 +71,11 @@ Docuementation : Swagger (http://localhost:8080/swagger-ui.html)
 [3] Install PostgreSQL : https://www.postgresql.org/download/
 
 [4] Create a database called "Phonebook_db" in PostgreSQL
+
+[5] The api will recreate the database everytime the application is running. This can be changed in the application.properties file by changing this line : "spring.jpa.hibernate.ddl-auto=create" to "spring.jpa.hibernate.ddl-auto=none"
+
+This does however require the database named "Phonebook_db" to be created. I have excluded the creation of the db in the script.
+Scripts are only executed against the db once. To re-run the scripts -> delete all tables from Postgres, rebuild the application and run. 
 
 ### Workflow : 
 

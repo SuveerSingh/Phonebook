@@ -28,6 +28,9 @@ export const AppRoutes: Routes = [
             }, {
                 path: 'phonebookentry',
                 loadChildren: './phonebookentry/phonebookentry.module#PhonebookentryModule',                
+            }, {
+                path: 'categorymanagement',
+                loadChildren: './categorymanagement/categorymanagement.module#CategorymanagementModule',                
             }             
         ]
     }, {
