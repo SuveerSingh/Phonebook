@@ -8,13 +8,16 @@ import { PhonebookentryComponent } from './phonebookentry.component';
 import { PhonebookentryRoutes } from './phonebookentry.routes';
 import { LoadingModule } from 'ngx-loading';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 @NgModule({
     imports: [
         RouterModule.forChild(PhonebookentryRoutes),
         CommonModule,
         FormsModule,
         MaterialModule,
-        LoadingModule
+        LoadingModule,
+        Ng2SearchPipeModule
     ],
     declarations: [PhonebookentryComponent]
 })

@@ -56,6 +56,7 @@ import { JwtHelper } from 'angular2-jwt';
 import { ErrorHandlingService} from './services/errorhandling.service'
 import { LoadingModule } from 'ngx-loading';
 import { SettingsProvider} from './services/settings';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 export function init(settingsProvider: SettingsProvider) {
   return () => settingsProvider.loadConfig();
@@ -114,6 +115,7 @@ export class MaterialModule { }
     FixedpluginModule,
     SweetAlertModule,
     LoadingModule,
+    Ng2SearchPipeModule,
   ],
   declarations: [
     AppComponent,

@@ -45,6 +45,12 @@ export const ROUTES: RouteInfo[] = [{
     title: 'Category Management',  
     type: 'link',
     icontype: 'group_work'
+},
+{ 
+    path: '/login', 
+    title: 'Logout',  
+    type: 'link',
+    icontype: 'group_work'
 }];
 
 

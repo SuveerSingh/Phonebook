@@ -60,6 +60,7 @@
     "msal": "^0.1.6",
     "ng2-nouislider": "1.7.7",
     "ng2-select": "2.0.0",
+    "ng2-search-filter": "0.4.7",
     "ngx-chips": "1.6.3",
     "ngx-loading": "^1.0.14",
     "nouislider": "9.2.0",

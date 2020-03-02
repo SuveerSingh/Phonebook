@@ -13,12 +13,12 @@
           </div>
           <div class="col-md-3">
             <mat-form-field class="example-full-width">
-              <input matInput type="text" placeholder="Description" [(ngModel)]="description">
+              <input matInput type="text" placeholder="Phone Number" [(ngModel)]="phoneNumber">
             </mat-form-field>
           </div>
           <div class="col-md-3">
             <mat-form-field class="example-full-width">
-              <input matInput type="text" placeholder="Phone Number" [(ngModel)]="phoneNumber">
+              <input matInput type="text" placeholder="Description" [(ngModel)]="description">
             </mat-form-field>
           </div>
           <div class="col-md-2">
@@ -60,7 +60,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let row of tableData1.dataRows">
+                  <tr *ngFor="let row of tableData1.dataRows | filter:searchText">
                     <!-- <td class="text-center">{{row[0]}}</td>
                     <td></td> -->
                     <td class="text-center">{{row[1]}}</td>
@@ -68,7 +68,7 @@
                     <td class="text-center">{{row[2]}}</td>
                     <td></td>
                     <td class="td-actions text-right">
-                      <button mat-raised-button type="button" class="btn btn-warning" (click)="edit(row[0], row[1])"
+                      <button mat-raised-button type="button" class="btn btn-warning" (click)="edit(row[1], row[2])"
                         mat-raised-button matTooltip="Edit Phonebook" [matTooltipPosition]="position.value">
                         <i class="material-icons">edit</i>
                       </button>

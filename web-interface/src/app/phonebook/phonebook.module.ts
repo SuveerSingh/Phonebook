@@ -7,6 +7,7 @@ import { MaterialModule } from '../app.module';
 import { PhonebookComponent } from './phonebook.component';
 import { PhonebookRoutes } from './phonebook.routes';
 import { LoadingModule } from 'ngx-loading';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import { LoadingModule } from 'ngx-loading';
         CommonModule,
         FormsModule,
         MaterialModule,
-        LoadingModule
+        LoadingModule,
+        Ng2SearchPipeModule
     ],
     declarations: [PhonebookComponent]
 })

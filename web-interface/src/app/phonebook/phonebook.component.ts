@@ -29,7 +29,7 @@ export class PhonebookComponent implements OnInit {
   positionOptions: TooltipPosition[] = ['below'];
   position = new FormControl(this.positionOptions[0]);
 
-  description : "";
+  description: "";
 
   constructor(public _apiservice: APIService,
     public _dataservice: DataService,
@@ -41,7 +41,7 @@ export class PhonebookComponent implements OnInit {
     this.getAllPhonebooks();
 
     this.tableData1 = {
-      headerRow: ['Id', 'Description'],
+      headerRow: ['#', 'Description'],
       dataRows: []
     };
 
@@ -50,35 +50,48 @@ export class PhonebookComponent implements OnInit {
   getAllPhonebooks() {
     this._apiservice.listPhonebooks(this._dataservice.userId).subscribe((response) => {
       if (response) {
-        
-        console.log(response);
-        
+
+        if(response.phoneBookList.length == 0){
+          this.displayError('There are currently no phonebooks!')
+        }
+
         this.datarowsmaster = [];
         this.datarowsmaster = response.phoneBookList;
-        this.tableData1.dataRows = [];
+        this.tableData1.dataRows = [];    
 
         for (var i = 0; i < this.datarowsmaster.length; i++) {
 
           this.datarows = [];
-                   
-          this.datarows.push(this.datarowsmaster[i].id.toString());         
-          this.datarows.push(this.datarowsmaster[i].description);         
+
+          this.datarows.push(this.datarowsmaster[i].id.toString());
+          this.datarows.push(this.datarowsmaster[i].description);
 
           this.tableData1.dataRows.push(this.datarows);
-          this.changeDetectorRefs.detectChanges();          
+          this.changeDetectorRefs.detectChanges();
         }
 
       }
     });
   }
 
-  edit(phonebookId, description){
+  edit(phonebookId, description) {
     console.log(phonebookId);
     console.log(description);
+    swal({
+      title: 'Coming soon',
+      text: 'We will notify you once you are able to edit a phonebook',
+      type: 'warning',
+      confirmButtonText: 'Continue',
+      confirmButtonClass: 'btn btn-success',
+      buttonsStyling: false
+    }).then(function (dismiss) {
+    }).catch(swal.noop);
   }
 
-  addPhonebook(){
+  addPhonebook() {
     
+    if (this.description == null) { this.displayError('Description cannot be empty'); return; }    
+
     this._apiservice.addPhonebook(this._dataservice.userId, this.description).subscribe((response) => {
       if (response) {
         if (response.status) {
@@ -96,8 +109,20 @@ export class PhonebookComponent implements OnInit {
             thisInstance.getAllPhonebooks();
             thisInstance.description = '';
           }).catch(swal.noop);
-      }}
+        }
+      }
     });
   }
 
+  displayError(message) {
+    swal({
+      title: 'Oops!',
+      text: message,
+      type: 'error',
+      confirmButtonText: 'Continue',
+      confirmButtonClass: 'btn btn-success',
+      buttonsStyling: false
+    }).then(function (dismiss) {
+    }).catch(swal.noop);
+  }
 }
